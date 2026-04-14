@@ -1,46 +1,70 @@
 console.log('welcome');
 
-
-
-// Number guessing game works perfectly in console
-function numberGuessingLogic(){
+let startButton = document.querySelector('#heading-title')
+let gameOn = false
+let headingTitle = document.getElementById('heading-title')
+let showUserGuess = document.getElementById('showUserGuess')
+  const btn = document.querySelector("#numberGuessingGameBtn")
+  const inputValueElement = document.querySelector("#userGuessNumber")
+  let displayMessagePosition = document.getElementById('showMessage')
+  let displayRemainingGuesses = document.getElementById('showRemainingGuesses')
+  const guessesByUser = [];
   let chances = 10;
-  const guessesByUser = []
-  
   let actualNumber = Math.floor((Math.random() * 100)+1);
   console.log(actualNumber);
-  
 
-while (chances>0) {
-  let userGuess = Number(prompt('enter your guess'))
-  guessesByUser.push(userGuess);
+
+function numberGuessingLogic(userGuess){
+  let message;
+  userGuess = Number(userGuess)
+  chances --;
    if(userGuess === actualNumber){
      console.log(`Wohoo! you guessed it right! in your ${10-chances +1} attempt`);
-     break;
+    message = `Wohoo! you guessed it right!`
+    gameOn = false;
+    headingTitle.innerText = message;
+    return message;
    }
+
     else if(userGuess > actualNumber){
-    console.log(`too high ${--chances} turns left`);
+      message = "number too high"
+      return message;
+    // console.log(`too high ${--chances} turns left`);
     }
     else{
-    console.log(`too low ${--chances} turns left`);
+      message = 'number too low'
+      return message;
+    // console.log(`too low ${--chances} turns left`);
     }
-console.log(guessesByUser);
 
   
 }
 
+startButton.addEventListener('click',()=>{
+  
+  gameOn=true;
+  headingTitle.innerText = "Game ON!!"
+})
 
-if(chances===0){
+btn.addEventListener('click',()=>{
+  if (!gameOn) return;
+
+    userGuess = inputValueElement.value;
+    console.log(userGuess);
+    guessesByUser.push(userGuess);
+    showUserGuess.textContent = guessesByUser
+    let result  = numberGuessingLogic(userGuess)
+    
+    displayMessagePosition.innerText = result;
+    displayRemainingGuesses.textContent = `${chances}`
+    inputValueElement.value ='';
+    if(chances===0){
+    headingTitle.innerText = 'uh,oh! You lost. Wanna give up? or just Play again!'+ headingTitle.innerText;
   console.log('uh,oh! You lost. Wanna give up? or just Play again!');
-  
+  gameOn = false;
 }
 
-   
-  
-  
-  
-  
+  })
 
 
 
-}
