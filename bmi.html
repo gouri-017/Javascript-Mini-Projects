@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Calculate your BMI</title>
+</head>
+<body>
+  <label for="height-in-cm">Height in CM:</label>
+  <input type="text" id="height-in-cm">
+
+  <label for="weight-in-kg">Weight in KG:</label>
+  <input type="text" id="weight-in-kg">
+
+
+  <button id="calculate-bmi"> Calculate</button>
+
+
+  <p id="calculatedBmi"></p>
+
+  <h3> BMI Weight Guide</h3>
+  <p>Under Weight = Less than 18.5</p>
+  <p>Healthy Weight = 18.6 and 24.9</p>
+  <p>Overweight = Greater than 24.9</p>
+
+  
+
+<script>
+
+
+
+const calculateBtn = document.getElementById('calculate-bmi')
+let userHeight = document.getElementById('height-in-cm')
+let userWeight = document.getElementById('weight-in-kg')
+const showBmi = document.getElementById('calculatedBmi')
+let message = 'please enter correct details'
+
+
+calculateBtn.addEventListener('click',()=>{
+
+
+  userHeight = Number(userHeight.value)
+  userWeight = Number(userWeight.value)
+  console.log(userHeight,userWeight);
+  
+
+
+let calculateBmi = (userWeight / (userHeight*userHeight))*10000;
+console.log(calculateBmi);
+
+
+if (calculateBmi < 18.5)
+message = 'you are underweight'
+else if (calculateBmi > 18.5 && calculateBmi<= 24.9)
+message = 'you are healthy'
+else
+message = 'you are overweight'
+
+
+showBmi.innerText = `${message} Your Calculated BMI is ${calculateBmi}`
+
+
+userHeight.value=''
+userWeight.value =''
+
+})
+
+ 
+  
+  
+</script>
+
+
+</body>
+</html>
